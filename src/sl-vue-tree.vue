@@ -9,11 +9,11 @@
     <div ref="nodes" class="sl-vue-tree-nodes-list">
       <div
           class="sl-vue-tree-node" v-for="(node, nodeInd) in nodes"
-          :class="{
+          :class="[{
             'sl-vue-tree-selected': node.isSelected,
             'sl-vue-tree-node_first': node.isFirstChild,
             'sl-vue-tree-node_last': node.isLastChild
-          }"
+          }, node.customClass]"
       >
         <div
           class="sl-vue-tree-cursor sl-vue-tree-cursor_before"
@@ -76,7 +76,7 @@
           </span>
 
             <slot name="title" :node="node">{{ node.title }}</slot>
-            
+
             <slot name="empty-node" :node="node" v-if="!node.isLeaf && node.children.length == 0 && node.isExpanded">
             </slot>
 
@@ -114,7 +114,7 @@
           <template slot="sidebar" slot-scope="{ node }">
             <slot name="sidebar" :node="node"></slot>
           </template>
-          
+
           <template slot="empty-node" slot-scope="{ node }">
             <slot name="empty-node" :node="node" v-if="!node.isLeaf && node.children.length == 0 && node.isExpanded">
             </slot>
